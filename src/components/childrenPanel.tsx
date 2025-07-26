@@ -4,45 +4,13 @@ import {
   CalciteBlockGroup,
   CalciteButton,
 } from "@esri/calcite-components-react";
-import { useState } from "react";
 import type { FosterChild } from "../types/fosterChild";
 
-function ChildrenPanel() {
-  const fakeChildren: Array<FosterChild> = [
-    { name: "Jayden Smith", gender: "male", age: 12, matchedHome: null },
-    { name: "Emily Chen", gender: "female", age: 9, matchedHome: null },
-    { id: 3, name: "Liam Garcia", gender: "male", age: 14, matchedHome: null },
-    { id: 4, name: "Ava Johnson", gender: "female", age: 7, matchedHome: null },
-    {
-      id: 5,
-      name: "Noah Thompson",
-      gender: "non-binary",
-      age: 10,
-      matchedHome: null,
-    },
-    {
-      id: 6,
-      name: "Isabella Martinez",
-      gender: "female",
-      age: 11,
-      matchedHome: null,
-    },
-    { id: 7, name: "Ethan Lee", gender: "male", age: 13, matchedHome: null },
-    {
-      id: 8,
-      name: "Sophia Brown",
-      gender: "female",
-      age: 8,
-      matchedHome: null,
-    },
-    { id: 9, name: "Mason Davis", gender: "male", age: 15, matchedHome: null },
-    {
-      id: 10,
-      name: "Harper Nguyen",
-      gender: "non-binary",
-      age: 10,
-      matchedHome: null,
-    },
+function ChildrenPanel({ fosterChildren }: { fosterChildren: FosterChild[] }) {
+  const genderOptions = [
+    { label: "Any", value: "any" },
+    { label: "Female", value: "f" },
+    { label: "Male", value: "m" },
   ];
 
   return (
@@ -53,13 +21,19 @@ function ChildrenPanel() {
         </CalciteBlock>
 
         <CalciteBlock open>
-          {fakeChildren.map((child) => (
-            <CalciteBlockSection key={child.id} text={child.name}>
-              <div className="pl-5">
-                <div >Gender: {child.gender}</div>
+          {fosterChildren.map((child) => (
+            <CalciteBlockSection text={child.name} open>
+              <div className="pl-12 mb-5">
+                <div >Gender: {genderOptions.find(option => option.value === child.gender)?.label || "N/A"}</div>
                 <div >Age: {child.age}</div>
                 <div >Trauma Care: {child.traumaCare ? child.traumaCare  : "N/A"}</div>
-                <div className="underline font-bold text-[#769A96]">Matched home: {child.matchedHome ? child.matchedHome.address : "N/A"}</div>
+                {
+                  (child.matchedHome ?
+                  <div className="underline font-bold text-[#08201E] bg-[#C8D9D3] p-2 mr-4">Matched home(s): {child.matchedHome.address}</div>
+                  :
+                  <div className="underline font-bold text-[#fff] bg-[#AC6868] p-2 mr-4">Matched home(s): N/A</div>)
+                }
+                
               </div>
             </CalciteBlockSection>
           ))}
