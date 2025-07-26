@@ -20,7 +20,6 @@ function Filters() {
   const [languages, setLanguages] = useState<string[]>([]);
   const [populations, setPopulations] = useState<string[]>([]);
 
-
   const togglePopulation = (pop: string) => {
     setPopulations((prev) =>
       prev.includes(pop) ? prev.filter((p) => p !== pop) : [...prev, pop]
