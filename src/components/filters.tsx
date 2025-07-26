@@ -32,7 +32,6 @@ function Filters() {
         <CalciteBlock
           heading="Other kids"
           description={`Age ${ageRange[0]}–${ageRange[1]}, ${otherKidsGender}`}
-          open
           collapsible
         >
           <CalciteSlider
@@ -65,7 +64,7 @@ function Filters() {
           </CalciteSegmentedControl>
         </CalciteBlock>
 
-        <CalciteBlock heading="Gender" description={gender} open collapsible>
+        <CalciteBlock heading="Gender" description={gender} collapsible>
           <CalciteSegmentedControl>
             {["Any", "Female Only", "Male Only"].map((value) => (
               <CalciteSegmentedControlItem
@@ -80,12 +79,7 @@ function Filters() {
           </CalciteSegmentedControl>
         </CalciteBlock>
 
-        <CalciteBlock
-          heading="Beds Available"
-          description={beds}
-          open
-          collapsible
-        >
+        <CalciteBlock heading="Beds Available" description={beds} collapsible>
           <CalciteSegmentedControl>
             {["1+", "2+", "3+", "4+", "5+"].map((value) => (
               <CalciteSegmentedControlItem
@@ -103,7 +97,6 @@ function Filters() {
         <CalciteBlock
           heading="Accepts sibling sets"
           description={acceptsSiblings}
-          open
           collapsible
         >
           <CalciteSegmentedControl>
@@ -123,7 +116,6 @@ function Filters() {
         <CalciteBlock
           heading="Languages spoken"
           description={languages.length > 0 ? languages.join(", ") : "Any"}
-          open
           collapsible
         >
           <CalciteCombobox
@@ -145,12 +137,11 @@ function Filters() {
         <CalciteBlock
           heading="Special Populations"
           description={populations.length > 0 ? populations.join(", ") : "Any"}
-          open
           collapsible
         >
           <CalciteList selectionMode="multiple">
             {[
-              "Neurodivergent",
+              "At risk",
               "Substance abuse",
               "Co-occuring disorders",
               "Sexual abuse survivors",

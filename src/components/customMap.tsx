@@ -40,9 +40,9 @@ function CustomMap() {
 
   return (
     <arcgis-map item-id="02b37471d5d84cacbebcccd785460e94" onarcgisViewReadyChange={handleViewReady}  style={{ width: "100%", height: "100vh" }}>
-      <arcgis-zoom position="top-left" />
-      <arcgis-search position="top-right" />
-      <arcgis-legend position="bottom-right" />
+      <arcgis-search position="bottom-left" />
+      {/* <arcgis-legend position="bottom-right" /> */}
+      <arcgis-zoom position="bottom-right" />
     </arcgis-map>
   );
 }
