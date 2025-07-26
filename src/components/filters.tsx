@@ -40,12 +40,12 @@ function Filters() {
             ticks={5}
             labelTicks
             min={0}
-            minLabel="test"
+            minLabel="Minimum age"
             minValue={ageRange[0]}
-            maxLabel="test"
+            maxLabel="Maximum age"
             maxValue={ageRange[1]}
             max={21}
-            // snap
+            snap
             labelHandles
             onCalciteSliderChange={(e) =>
               setAgeRange([e.target.minValue, e.target.maxValue])

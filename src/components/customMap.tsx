@@ -10,7 +10,7 @@ import "@arcgis/map-components/components/arcgis-search";
 import Graphic from "@arcgis/core/Graphic.js";
 
 function CustomMap() {
-  const handleViewReady = (event) => {
+  const handleViewReady = (event: any) => {
     const viewElement = event.target;
 
     const point = {
