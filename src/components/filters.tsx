@@ -118,25 +118,6 @@ function Filters({
         </CalciteBlock>
 
         <CalciteBlock
-          heading="Gender"
-          description={genderOptions.find(option => option.value === gender)?.label || "Any"}
-          collapsible
-        >
-          <CalciteSegmentedControl>
-            {genderOptions.map(({ label, value }) => (
-              <CalciteSegmentedControlItem
-                key={value}
-                value={value}
-                checked={gender === value}
-                onClick={() => setGender(value)}
-              >
-                {label}
-              </CalciteSegmentedControlItem>
-            ))}
-          </CalciteSegmentedControl>
-        </CalciteBlock>
-
-        <CalciteBlock
           heading="Age"
           description={`Age ${minAge}–${maxAge}`}
           collapsible
@@ -158,6 +139,25 @@ function Filters({
               setMaxAge(e.target.maxValue);
             }}
           />
+        </CalciteBlock>
+
+        <CalciteBlock
+          heading="Gender"
+          description={genderOptions.find(option => option.value === gender)?.label || "Any"}
+          collapsible
+        >
+          <CalciteSegmentedControl>
+            {genderOptions.map(({ label, value }) => (
+              <CalciteSegmentedControlItem
+                key={value}
+                value={value}
+                checked={gender === value}
+                onClick={() => setGender(value)}
+              >
+                {label}
+              </CalciteSegmentedControlItem>
+            ))}
+          </CalciteSegmentedControl>
         </CalciteBlock>
 
         <CalciteBlock heading="Beds Available" description={beds} collapsible>
