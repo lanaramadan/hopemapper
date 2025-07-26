@@ -3,33 +3,31 @@
 @import "https://js.arcgis.com/4.33/map-components/main.css";
 @import "tailwindcss";
 
-
-#root,
-html,
-body {
-  height: 100%;
+/* Remove ALL margin and padding from page roots, and fill viewport */
+/* index.css */
+html, body, #root {
   margin: 0;
-}
-/* 
-arcgis-map {
-  display: block;
+  padding: 0;
+  width: 100vw;
   height: 100vh;
-} */
+  background-color: white; /* remove default dark background if any */
+}
+
+
+/* If you use any other containers or wrappers, ensure they also have no margin/padding and fill parent */
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color: #222;
+  /* background-color removed to avoid black bars */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+
   --calcite-color-brand: #769A96;
   --calcite-color-brand-press: #3C726C;
   --calcite-color-brand-hover: #15403C;

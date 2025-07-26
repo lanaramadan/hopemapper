@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SideNavbar from '../navbar';
-import Pie from '../Pie'; // <-- Import the Pie chart
+import TilePieChart from '../ArcGISChart';
 
 const baseTileStyle = {
   background: "#fff",
@@ -19,32 +20,32 @@ const baseTileStyle = {
 };
 
 // Example data for the Pie chart
-const pieData = [
-  { id: "Available", label: "Available", value: 40, color: "#759a96" },
-  { id: "Occupied", label: "Occupied", value: 60, color: "#e6ecea" }
-];
 
 function Dashboard() {
+  const navigate = useNavigate();
+
   // State for navbar section and active tab
   const [section, setSection] = useState('apps');
   const [activeTab, setActiveTab] = useState('Placement Tools');
-  const [hovered, setHovered] = useState(null);
+  const [hovered, setHovered] = useState<string | null>(null);
 
   // Analytics tiles
   const analyticsTiles = [
-    {
-      key: 'total',
-      label: 'Total Available Homes',
-      onClick: () => alert('Total Available Homes clicked!'),
-      hovered: hovered === 'total',
-      onMouseEnter: () => setHovered('total'),
-      onMouseLeave: () => setHovered(null),
-      content: (
-        <div style={{ width: 150, height: 150, marginTop: 16 }}>
-          <Pie data={pieData} />
-        </div>
-      )
-    },
+    // In Dashboard.tsx
+  {
+    key: 'total',
+    label: 'Total Available Homes',
+    onClick: () => alert('Total Available Homes clicked!'),
+    hovered: hovered === 'total',
+    onMouseEnter: () => setHovered('total'),
+    onMouseLeave: () => setHovered(null),
+    content: (
+      <div style={{ width: 150, height: 150, marginTop: 16 }}>
+        <TilePieChart />
+      </div>
+    )
+  },
+  // ...other tiles
     {
       key: 'time',
       label: 'Time in Agency',
@@ -68,7 +69,7 @@ function Dashboard() {
     {
       key: 'homes',
       label: 'Available Homes',
-      onClick: () => alert('Available Homes clicked!'),
+      onClick: () => navigate('/map'), // <-- Navigates to /map
       hovered: hovered === 'homes',
       onMouseEnter: () => setHovered('homes'),
       onMouseLeave: () => setHovered(null),
@@ -76,7 +77,7 @@ function Dashboard() {
     {
       key: 'matching',
       label: 'Home Matching',
-      onClick: () => alert('Home Matching clicked!'),
+      onClick: () => navigate('/map'), // <-- Navigates to /map
       hovered: hovered === 'matching',
       onMouseEnter: () => setHovered('matching'),
       onMouseLeave: () => setHovered(null),

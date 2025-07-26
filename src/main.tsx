@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App'
 
+
 import '@esri/calcite-components/dist/calcite/calcite.css'
 import { defineCustomElements } from "@esri/calcite-components/dist/loader";
 
@@ -11,6 +12,6 @@ defineCustomElements(window);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <App/>
   </StrictMode>,
 )
