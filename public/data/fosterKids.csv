@@ -1,31 +1,31 @@
 First Name,Last Name,Age,Gender,Type of Trauma Care
-Emily,Chen,14,Female,Domestic Violence
-Michael,Roberts,9,Male,At-Risk Youth
-Sophia,Garcia,5,Female,Human Trafficking Survivors
-Daniel,Brown,17,Male,Substance Abuse
-Olivia,Miller,12,Female,Domestic Violence
-William,Davis,7,Male,At-Risk Youth
-Ava,Wilson,3,Female,Human Trafficking Survivors
-James,Moore,19,Male,Substance Abuse
-Isabella,Taylor,15,Female,Domestic Violence
-Ethan,Anderson,10,Male,At-Risk Youth
-Mia,Thomas,1,Female,Human Trafficking Survivors
-Alexander,Jackson,20,Male,Substance Abuse
-Charlotte,White,13,Female,Domestic Violence
-Benjamin,Harris,6,Male,At-Risk Youth
-Amelia,Martin,2,Female,Human Trafficking Survivors
-Jacob,Thompson,18,Male,Substance Abuse
-Harper,Green,11,Female,Domestic Violence
-Lucas,Hall,8,Male,At-Risk Youth
-Evelyn,King,4,Female,Human Trafficking Survivors
-Mason,Wright,16,Male,Substance Abuse
-Abigail,Lopez,0,Female,Domestic Violence
-Liam,Hill,14,Male,At-Risk Youth
-Elizabeth,Scott,9,Female,Human Trafficking Survivors
-Noah,Adams,21,Male,Substance Abuse
-Sofia,Baker,10,Female,Domestic Violence
-Elijah,Nelson,5,Male,At-Risk Youth
-Avery,Carter,16,Female,Human Trafficking Survivors
-Logan,Mitchell,13,Male,Substance Abuse
-Ella,Perez,7,Female,Domestic Violence
-Caleb,Roberts,11,Male,At-Risk Youth
+Emily,Chen,14,f
+Michael,Roberts,9,m,At risk youth
+Sophia,Garcia,5,f,Human trafficking survivors
+Daniel,Brown,17,m,Substance abuse
+Olivia,Miller,12,f
+William,Davis,7,m,At risk youth
+Ava,Wilson,3,f,Human trafficking survivors
+James,Moore,19,m,Substance abuse
+Isabella,Taylor,15,f
+Ethan,Anderson,10,m,At risk youth
+Mia,Thomas,1,f,Human trafficking survivors
+Alexander,Jackson,20,m,Substance abuse
+Charlotte,White,13,f
+Benjamin,Harris,6,m,At risk youth
+Amelia,Martin,2,f,Human trafficking survivors
+Jacob,Thompson,18,m,Substance abuse
+Harper,Green,11,f
+Lucas,Hall,8,m,At risk youth
+Evelyn,King,4,f,Human trafficking survivors
+Mason,Wright,16,m,Substance abuse
+Abigail,Lopez,0,f
+Liam,Hill,14,m,At risk youth
+Elizabeth,Scott,9,f,Human trafficking survivors
+Noah,Adams,21,m,Substance abuse
+Sofia,Baker,10,f
+Elijah,Nelson,5,m,At risk youth
+Avery,Carter,16,f,Human trafficking survivors
+Logan,Mitchell,13,m,Substance abuse
+Ella,Perez,7,f
+Caleb,Roberts,11,m,At risk youth

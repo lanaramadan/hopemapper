@@ -7,6 +7,12 @@ import {
 import type { FosterChild } from "../types/fosterChild";
 
 function ChildrenPanel({ fosterChildren }: { fosterChildren: FosterChild[] }) {
+  const genderOptions = [
+    { label: "Any", value: "any" },
+    { label: "Female", value: "f" },
+    { label: "Male", value: "m" },
+  ];
+
   return (
     <div className="text-left">
       <CalciteBlockGroup>
@@ -17,11 +23,17 @@ function ChildrenPanel({ fosterChildren }: { fosterChildren: FosterChild[] }) {
         <CalciteBlock open>
           {fosterChildren.map((child) => (
             <CalciteBlockSection text={child.name} open>
-              <div className="pl-5">
-                <div >Gender: {child.gender}</div>
+              <div className="pl-12 mb-5">
+                <div >Gender: {genderOptions.find(option => option.value === child.gender)?.label || "N/A"}</div>
                 <div >Age: {child.age}</div>
                 <div >Trauma Care: {child.traumaCare ? child.traumaCare  : "N/A"}</div>
-                <div className="underline font-bold text-[#769A96]">Matched home: {child.matchedHome ? child.matchedHome.address : "N/A"}</div>
+                {
+                  (child.matchedHome ?
+                  <div className="underline font-bold text-[#08201E] bg-[#C8D9D3] p-2 mr-4">Matched home(s): {child.matchedHome.address}</div>
+                  :
+                  <div className="underline font-bold text-[#fff] bg-[#AC6868] p-2 mr-4">Matched home(s): N/A</div>)
+                }
+                
               </div>
             </CalciteBlockSection>
           ))}
