@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SideNavbar from './navbar';
-import Pie from './Pie'; // <-- Import the Pie chart
+import SideNavbar from '../navbar';
+import Pie from '../Pie'; // <-- Import the Pie chart
 
 const baseTileStyle = {
   background: "#fff",

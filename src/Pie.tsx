@@ -17,7 +17,7 @@ import { ResponsivePie } from "@nivo/pie";
 /**
  * @param {PieProps} props
  */
-const Pie = ({ data /* see data tab */ }) => (
+const Pie = ({ data: any /* see data tab */ }) => (
    <div style={{ width: 150, height: 150 }}>
   <ResponsivePie
     data={data}

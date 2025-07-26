@@ -1,6 +1,6 @@
 import React from 'react';
 import './Homepage.css';
-import homemapperLogo from './images/Hopemapper_big_logo.png'; // <-- Import the logo
+import homemapperLogo from '../images/Hopemapper_big_logo.png';
 import { useNavigate } from 'react-router-dom';
 
 function Homepage() {
