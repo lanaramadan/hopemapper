@@ -1,107 +1,54 @@
-import React from 'react';
-import './Homepage.css';
-import homemapperLogo from '../images/Hopemapper_big_logo.png';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import "./Homepage.css";
+import homemapperLogo from "../images/Hopemapper_big_logo.png";
+import { useNavigate } from "react-router-dom";
 
 function Homepage() {
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    navigate('/dashboard');
+    navigate("/dashboard");
   };
 
   return (
-    <div
-      className="Homepage"
-      style={{
-        display: 'flex',
-        height: '100vh',
-        width: '100vw',
-        background: '#f5f6fa'
-      }}
-    >
+    <div className="Homepage flex h-screen w-screen bg-[#f5f6fa]">
       {/* Left 3/4: Centered Title */}
-      <div
-        style={{
-          flex: 3,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          color: '#F1EFEF'
-        }}
-      >
-        <img src={homemapperLogo} alt="Logo" style={{ width: '100px', height: '100px' }} />
-        <h1 style={{ fontSize: '3rem', color: '#759a96', textAlign: 'center' }}>
-          HopeMapper
-        </h1>
+      <div className="flex-[3] flex flex-col items-center justify-center text-[#F1EFEF]">
+        <img src={homemapperLogo} alt="Logo" className="w-[100px] h-[100px]" />
+        <h1 className="text-5xl text-[#759a96] text-center">HopeMapper</h1>
       </div>
+
       {/* Right 1/4: Login Portal */}
-      <div
-        style={{
-          flex: 1,
-          background: '#759a96',
-          boxShadow: '-2px 0 8px rgba(0,0,0,0.05)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      >
-        <div
-          style={{
-            width: '80%',
-            padding: '2rem',
-            borderRadius: '8px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-            background: '#fafbfc'
-          }}
-        >
-          <h2 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>Login</h2>
+      <div className="flex-1 bg-[#759a96] shadow-[ -2px_0_8px_rgba(0,0,0,0.05) ] flex items-center justify-center">
+        <div className="w-4/5 p-8 rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.08)] bg-[#fafbfc]">
+          <h2 className="text-[#08201E] font-bold mb-1">Login</h2>
           <form onSubmit={handleLogin}>
-            <div style={{ marginBottom: '1rem' }}>
-              <label htmlFor="username" style={{ display: 'block', marginBottom: '.5rem' }}>
+            <div className="mb-4">
+              <label htmlFor="username" className="block text-[#08201E] text-left ">
                 Username
               </label>
               <input
                 id="username"
                 type="text"
-                style={{
-                  width: '100%',
-                  padding: '.5rem',
-                  borderRadius: '4px',
-                  border: '1px solid #ccc'
-                }}
+                className="w-full p-2 rounded border border-gray-300 text-[#08201E] bg-white"
               />
             </div>
-            <div style={{ marginBottom: '1.5rem' }}>
-              <label htmlFor="password" style={{ display: 'block', marginBottom: '.5rem' }}>
+
+            <div className="mb-6">
+              <label htmlFor="password" className="block mb-2 text-[#08201E] text-left">
                 Password
               </label>
               <input
                 id="password"
                 type="password"
-                style={{
-                  width: '100%',
-                  padding: '.5rem',
-                  borderRadius: '4px',
-                  border: '1px solid #ccc'
-                }}
+                className="w-full p-2 rounded border border-gray-300  text-[#08201E] text-left"
               />
             </div>
+
             <button
+              className="w-full px-3 py-3 rounded bg-[#769A96] text-white font-bold text-lg cursor-pointer hover:bg-[#b6cbc5] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#aabfb9]"
               type="submit"
-              style={{
-                width: '100%',
-                padding: '.75rem',
-                borderRadius: '4px',
-                border: 'none',
-                background: '#c8d9d3',
-                color: '#fff',
-                fontWeight: 'bold',
-                fontSize: '1rem',
-                cursor: 'pointer'
-              }}
             >
               Login
             </button>
