@@ -36,7 +36,10 @@ function ChildrenPanel({ fosterChildren }: { fosterChildren: FosterChild[] }) {
     <div className="text-left">
       <CalciteBlockGroup>
         <CalciteBlock open className="text-center">
-          <CalciteButton label="Match" onClick={handleMatchClick}>Match kids to homes</CalciteButton>
+          <div className="flex gap-2 justify-center">
+            <CalciteButton label="Match" onClick={handleMatchClick}>Match kids to homes</CalciteButton>
+            <CalciteButton label="Match" appearance="outline-fill" onClick={handleMatchClick}>Reset matches</CalciteButton>
+          </div>
         </CalciteBlock>
 
         <CalciteBlock open>

@@ -71,6 +71,7 @@ function MapDashboard() {
         slot="panel-start"
         position="start"
         displayMode="float-content"
+        className="h-[25%]"
       >
         <CalcitePanel>
           <Filters
