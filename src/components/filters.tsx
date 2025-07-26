@@ -81,6 +81,50 @@ function Filters({
   return (
     <div className="text-left">
       <CalciteBlockGroup>
+      <CalciteBlock
+          heading="Age"
+          description={`Age ${minAge}–${maxAge}`}
+          collapsible
+        >
+          <CalciteSlider
+            step={1}
+            ticks={5}
+            labelTicks
+            min={0}
+            minLabel="Minimum age"
+            minValue={minAge}
+            maxLabel="Maximum age"
+            maxValue={maxAge}
+            max={21}
+            snap
+            labelHandles
+            onCalciteSliderChange={(e) => {
+              setMinAge(e.target.minValue);
+              setMaxAge(e.target.maxValue);
+            }}
+          />
+        </CalciteBlock>
+
+        <CalciteBlock
+          heading="Gender"
+          description={genderOptions.find(option => option.value === gender)?.label || "Any"}
+          collapsible
+        >
+          <CalciteSegmentedControl>
+            {genderOptions.map(({ label, value }) => (
+              <CalciteSegmentedControlItem
+                key={value}
+                value={value}
+                checked={gender === value}
+                onClick={() => setGender(value)}
+              >
+                {label}
+              </CalciteSegmentedControlItem>
+            ))}
+          </CalciteSegmentedControl>
+        </CalciteBlock>
+
+        
         <CalciteBlock
           heading="Other kids"
           description={`Age ${minOtherKidsAge}–${maxOtherKidsAge}, ${otherKidsGender}`}
@@ -115,49 +159,6 @@ function Filters({
               </CalciteSegmentedControlItem>
             ))}
           </CalciteSegmentedControl>
-        </CalciteBlock>
-
-        <CalciteBlock
-          heading="Gender"
-          description={genderOptions.find(option => option.value === gender)?.label || "Any"}
-          collapsible
-        >
-          <CalciteSegmentedControl>
-            {genderOptions.map(({ label, value }) => (
-              <CalciteSegmentedControlItem
-                key={value}
-                value={value}
-                checked={gender === value}
-                onClick={() => setGender(value)}
-              >
-                {label}
-              </CalciteSegmentedControlItem>
-            ))}
-          </CalciteSegmentedControl>
-        </CalciteBlock>
-
-        <CalciteBlock
-          heading="Age"
-          description={`Age ${minAge}–${maxAge}`}
-          collapsible
-        >
-          <CalciteSlider
-            step={1}
-            ticks={5}
-            labelTicks
-            min={0}
-            minLabel="Minimum age"
-            minValue={minAge}
-            maxLabel="Maximum age"
-            maxValue={maxAge}
-            max={21}
-            snap
-            labelHandles
-            onCalciteSliderChange={(e) => {
-              setMinAge(e.target.minValue);
-              setMaxAge(e.target.maxValue);
-            }}
-          />
         </CalciteBlock>
 
         <CalciteBlock heading="Beds Available" description={beds} collapsible>

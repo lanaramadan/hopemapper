@@ -5,8 +5,27 @@ import {
   CalciteButton,
 } from "@esri/calcite-components-react";
 import type { FosterChild } from "../types/fosterChild";
+import matchChildrenToBeds from '../logic/matchAlgorithm'
+import {generateBedData} from "../data/generateMockData";
+import { useState, useEffect } from "react";
+
 
 function ChildrenPanel({ fosterChildren }: { fosterChildren: FosterChild[] }) {
+  const [matchedChildren, setMatchedChildren] = useState(fosterChildren);
+
+  const handleMatchClick = () => {
+    const beds = generateBedData(10);
+    console.log("fosterChildren before match:", fosterChildren);
+    console.log("matchedChildren before match:", matchedChildren);
+    const updatedChildren = matchChildrenToBeds([...matchedChildren], beds);
+    console.log("updatedChildren:", updatedChildren);
+    setMatchedChildren([...updatedChildren]);
+  };
+
+  useEffect(() => {
+    setMatchedChildren(fosterChildren);
+  }, [fosterChildren]);
+
   const genderOptions = [
     { label: "Any", value: "any" },
     { label: "Female", value: "f" },
@@ -17,7 +36,10 @@ function ChildrenPanel({ fosterChildren }: { fosterChildren: FosterChild[] }) {
     <div className="text-left">
       <CalciteBlockGroup>
         <CalciteBlock open className="text-center">
-          <CalciteButton label="Match">Match kids to homes</CalciteButton>
+          <div className="flex gap-2 justify-center">
+            <CalciteButton label="Match" onClick={handleMatchClick}>Match kids to homes</CalciteButton>
+            <CalciteButton label="Match" appearance="outline-fill" onClick={handleMatchClick}>Reset matches</CalciteButton>
+          </div>
         </CalciteBlock>
 
         <CalciteBlock open>
