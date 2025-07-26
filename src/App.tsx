@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<MapDashboard />} />
+        <Route path="/map" element={<MapDashboard />} />
       </Routes>
     </Router>
   )

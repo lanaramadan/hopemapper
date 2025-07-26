@@ -29,18 +29,14 @@ arcgis-map {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --calcite-button-background-color: #769A96;
+  
   --calcite-color-brand: #769A96;
-  --calcite-color-status-info: #769A96;
-  --calcite-ui-brand: #769A96;
+  --calcite-color-brand-press: #3C726C;
+  --calcite-color-brand-hover: #15403C;
   --calcite-slider-track-fill-color: #769A96;
   --calcite-slider-handle-extension-color: #769A96;
   --calcite-slider-accent-color: #769A96;
   --calcite-slider-tick-color: #769A96;
   --calcite-slider-tick-selected-color: #769A96;
   --calcite-slider-graph-color: #769A96;
-  --calcite-color-brand-press: #769A96;
-  --calcite-color-status-info:  #769A96;
-  --calcite-segmented-control-icon-color: red
-
 }
