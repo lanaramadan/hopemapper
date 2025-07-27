@@ -24,7 +24,7 @@ function TopNavbar() {
       <CalciteNavigationLogo
         slot="logo"
         heading="HopeMapper"
-        description="tagline ??"
+        description="Mapping Stability and Matching Futures"
         onClick={() => navigate("/dashboard")}
         style={{ cursor: "pointer" }}
       />
