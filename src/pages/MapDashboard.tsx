@@ -13,7 +13,7 @@ import type { Home } from "../types/home";
 import {
   loadFosterChildrenFromText,
   loadHomesFromText,
-} from "../logic/matchAlgorithm";
+} from "../logic/csvLoaders";
 
 function MapDashboard() {
   const [fosterChildren, setFosterChildren] = useState<FosterChild[]>([]);
