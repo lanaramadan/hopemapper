@@ -67,7 +67,7 @@ function MapDashboard() {
         slot="panel-start"
         position="start"
         displayMode="float-content"
-        className="h-[35%]"
+        className="h-[35%] pl-2"
       >
         <CalcitePanel>
           <Filters
@@ -100,6 +100,7 @@ function MapDashboard() {
         slot="panel-end"
         position="start"
         displayMode="float-content"
+        className="pr-3"
       >
         <CalcitePanel>
           <ChildrenPanel
