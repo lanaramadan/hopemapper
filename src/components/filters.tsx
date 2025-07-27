@@ -1,6 +1,7 @@
 import {
   CalciteBlock,
   CalciteBlockGroup,
+  CalciteBlockSection,
   CalciteList,
   CalciteSlider,
   CalciteSegmentedControl,
@@ -9,29 +10,80 @@ import {
   CalciteComboboxItem,
   CalciteListItem,
 } from "@esri/calcite-components-react";
-import { useState } from "react";
 
-function Filters() {
-  const [ageRange, setAgeRange] = useState([0, 21]);
-  const [otherKidsGender, setOtherKidsGender] = useState("Any");
-  const [gender, setGender] = useState("Any");
-  const [beds, setBeds] = useState("1+");
-  const [acceptsSiblings, setAcceptsSiblings] = useState("Yes");
-  const [languages, setLanguages] = useState<string[]>([]);
-  const [populations, setPopulations] = useState<string[]>([]);
+interface FiltersProps {
+  minOtherKidsAge: number;
+  setMinOtherKidsAge: (age: number) => void;
 
+  maxOtherKidsAge: number;
+  setMaxOtherKidsAge: (age: number) => void;
+
+  otherKidsGender: string;
+  setOtherKidsGender: (gender: string) => void;
+
+  gender: string;
+  setGender: (gender: string) => void;
+
+  minAge: number;
+  setMinAge: (age: number) => void;
+
+  maxAge: number;
+  setMaxAge: (age: number) => void;
+
+  beds: string;
+  setBeds: (beds: string) => void;
+
+  acceptsSiblings: string;
+  setAcceptsSiblings: (accepts: string) => void;
+
+  languages: string[];
+  setLanguages: (languages: string[]) => void;
+
+  populations: string[];
+  setPopulations: (populations: string[]) => void;
+}
+
+function Filters({
+  minOtherKidsAge,
+  setMinOtherKidsAge,
+  maxOtherKidsAge,
+  setMaxOtherKidsAge,
+  otherKidsGender,
+  setOtherKidsGender,
+  gender,
+  setGender,
+  minAge,
+  setMinAge,
+  maxAge,
+  setMaxAge,
+  beds,
+  setBeds,
+  acceptsSiblings,
+  setAcceptsSiblings,
+  languages,
+  setLanguages,
+  populations,
+  setPopulations,
+}: FiltersProps) {
   const togglePopulation = (pop: string) => {
-    setPopulations((prev) =>
-      prev.includes(pop) ? prev.filter((p) => p !== pop) : [...prev, pop]
-    );
+    if (populations.includes(pop)) {
+      setPopulations(populations.filter((p) => p !== pop));
+    } else {
+      setPopulations([...populations, pop]);
+    }
   };
+  const genderOptions = [
+    { label: "Any", value: "any" },
+    { label: "Female Only", value: "f" },
+    { label: "Male Only", value: "m" },
+  ];
 
   return (
     <div className="text-left">
       <CalciteBlockGroup>
-        <CalciteBlock
-          heading="Other kids"
-          description={`Age ${ageRange[0]}–${ageRange[1]}, ${otherKidsGender}`}
+      <CalciteBlock
+          heading="Age"
+          description={`Age ${minAge}–${maxAge}`}
           collapsible
         >
           <CalciteSlider
@@ -40,15 +92,60 @@ function Filters() {
             labelTicks
             min={0}
             minLabel="Minimum age"
-            minValue={ageRange[0]}
+            minValue={minAge}
             maxLabel="Maximum age"
-            maxValue={ageRange[1]}
+            maxValue={maxAge}
             max={21}
             snap
             labelHandles
-            onCalciteSliderChange={(e) =>
-              setAgeRange([e.target.minValue, e.target.maxValue])
-            }
+            onCalciteSliderChange={(e) => {
+              setMinAge(e.target.minValue);
+              setMaxAge(e.target.maxValue);
+            }}
+          />
+        </CalciteBlock>
+
+        <CalciteBlock
+          heading="Gender"
+          description={genderOptions.find(option => option.value === gender)?.label || "Any"}
+          collapsible
+        >
+          <CalciteSegmentedControl>
+            {genderOptions.map(({ label, value }) => (
+              <CalciteSegmentedControlItem
+                key={value}
+                value={value}
+                checked={gender === value}
+                onClick={() => setGender(value)}
+              >
+                {label}
+              </CalciteSegmentedControlItem>
+            ))}
+          </CalciteSegmentedControl>
+        </CalciteBlock>
+
+        
+        <CalciteBlock
+          heading="Other kids"
+          description={`Age ${minOtherKidsAge}–${maxOtherKidsAge}, ${otherKidsGender}`}
+          collapsible
+        >
+          <CalciteSlider
+            step={1}
+            ticks={5}
+            labelTicks
+            min={0}
+            minLabel="Minimum age"
+            minValue={minOtherKidsAge}
+            maxLabel="Maximum age"
+            maxValue={maxOtherKidsAge}
+            max={21}
+            snap
+            labelHandles
+            onCalciteSliderChange={(e) => {
+              setMinOtherKidsAge(e.target.minValue);
+              setMaxOtherKidsAge(e.target.maxValue);
+            }}
           />
           <CalciteSegmentedControl>
             {["Any", "Female Only", "Male Only"].map((value) => (
@@ -57,21 +154,6 @@ function Filters() {
                 value={value}
                 checked={otherKidsGender === value}
                 onClick={() => setOtherKidsGender(value)}
-              >
-                {value}
-              </CalciteSegmentedControlItem>
-            ))}
-          </CalciteSegmentedControl>
-        </CalciteBlock>
-
-        <CalciteBlock heading="Gender" description={gender} collapsible>
-          <CalciteSegmentedControl>
-            {["Any", "Female Only", "Male Only"].map((value) => (
-              <CalciteSegmentedControlItem
-                key={value}
-                value={value}
-                checked={gender === value}
-                onClick={() => setGender(value)}
               >
                 {value}
               </CalciteSegmentedControlItem>
@@ -135,13 +217,13 @@ function Filters() {
         </CalciteBlock>
 
         <CalciteBlock
-          heading="Special Populations"
+          heading="Trauma Populations"
           description={populations.length > 0 ? populations.join(", ") : "Any"}
           collapsible
         >
           <CalciteList selectionMode="multiple">
             {[
-              "At risk",
+              "At risk youth",
               "Substance abuse",
               "Co-occuring disorders",
               "Sexual abuse survivors",
