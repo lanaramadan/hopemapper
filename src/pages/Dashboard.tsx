@@ -394,9 +394,24 @@ function Dashboard() {
                         >
                           Match Score: {score}%
                         </div>
-                        <div slot="description" className="italic text-left">
-                          {home.address}, {home.city},{" "}
-                          {home.state.toUpperCase()} {home.zipCode}
+                        <div slot="description" className="text-left">
+                          <div className="italic">
+                            {home.address}, {home.city},{" "}
+                            {home.state.toUpperCase()} {home.zipCode}
+                          </div>
+                          <div>Age Preference: {home.agePreference}</div>
+                          <div>
+                            Gender Preference:{" "}
+                            {home.genderPreference === "m"
+                              ? "Male"
+                              : home.genderPreference === "f"
+                              ? "Female"
+                              : "Any"}
+                          </div>
+                          <div>Trauma Care: {home.traumaCare}</div>
+                          <div>
+                            Languages: {home.languages?.join(", ") || "N/A"}
+                          </div>
                         </div>
                         {/* <CalciteButton
                           slot="footer-end"
