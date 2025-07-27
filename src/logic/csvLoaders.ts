@@ -92,8 +92,8 @@ export function loadHomesFromText(csv: string): Home[] {
       city: obj["city"],
       state: obj["state"],
       zipCode: obj["zip_code"],
-      languages: obj["languages_spoken"]
-        ? obj["languages_spoken"].split(" ").map((lang) => lang.trim())
+      languages: obj["language"]
+        ? obj["language"].split(" ").map((lang) => lang.trim())
         : [],
     };
   });
