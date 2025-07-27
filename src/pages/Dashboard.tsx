@@ -37,8 +37,6 @@ const baseTileStyle = {
   transition: "background 0.2s, box-shadow 0.2s",
 };
 
-// Example data for the Pie chart
-
 function Dashboard() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -49,7 +47,26 @@ function Dashboard() {
     }
   }, [location.state]);
 
-  console.log(location);
+  // new child information
+  const [showModal, setShowModal] = useState(false);
+  const [childName, setChildName] = useState("");
+  const [childAge, setChildAge] = useState<number | null>(null);
+  const [childGender, setChildGender] = useState<"m" | "f">("m");
+  const [childLanguages, setChildLanguages] = useState<string[]>([]);
+  const [childTrauma, setChildTrauma] = useState<
+    | "At risk youth"
+    | "Substance abuse"
+    | "Co-occuring disorders"
+    | "Sexual abuse survivors"
+    | "Human trafficking survivors"
+    | undefined
+  >(undefined);
+  const [matched, setMatched] = useState<FosterChild | null>(null);
+
+  const [matchedResult, setMatchedResult] = useState<
+    { home: Home; score: number }[] | null
+  >(null);
+  const [submitted, setSubmitted] = useState(false);
 
   // State for navbar section and active tab
   const [section, setSection] = useState("apps");
@@ -60,7 +77,19 @@ function Dashboard() {
 
   // Analytics tiles
   const analyticsTiles = [
-    // In Dashboard.tsx
+    {
+      key: "total",
+      label: "Total Available Homes",
+      onClick: () => alert("Total Available Homes clicked!"),
+      hovered: hovered === "total",
+      onMouseEnter: () => setHovered("total"),
+      onMouseLeave: () => setHovered(null),
+      content: (
+        <div style={{ width: 150, height: 150, marginTop: 16 }}>
+          <TilePieChart />
+        </div>
+      ),
+    },
     {
       key: "total",
       label: "Total Available Homes",
@@ -97,9 +126,9 @@ function Dashboard() {
   let tiles = [
     {
       key: "homes",
+
       label: "Upload Foster Child",
       onClick: () => setShowModal(true), // on click open the modal
-      // onClick: () => navigate('/map-dashboard'), // <-- Navigates to /map
       hovered: hovered === "homes",
       onMouseEnter: () => setHovered("homes"),
       onMouseLeave: () => setHovered(null),
@@ -107,135 +136,28 @@ function Dashboard() {
     {
       key: "matching",
       label: "Home Matching",
+
       onClick: () => navigate("/map-dashboard"), // <-- Navigates to /map
+
       hovered: hovered === "matching",
       onMouseEnter: () => setHovered("matching"),
       onMouseLeave: () => setHovered(null),
     },
   ];
 
-  // If Data Analysis is clicked, show analytics tiles in a pyramid layout
-  if (activeTab === "Data Dashboard" || activeTab === "Data Analysis") {
-    return (
-      <div
-        style={{
-          display: "flex",
-          height: "100dvh",
-          width: "100vw",
-          background: "#f5f6fa",
-          overflow: "hidden",
-        }}
-      >
-        <SideNavbar
-          section={section}
-          setSection={setSection}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "100%",
-          }}
-        >
-          {/* Top tile */}
-          <div
-            style={{ display: "flex", justifyContent: "center", width: "100%" }}
-          >
-            <div
-              style={{
-                ...baseTileStyle,
-                background: analyticsTiles[0].hovered
-                  ? "#e6ecea"
-                  : baseTileStyle.background,
-                boxShadow: analyticsTiles[0].hovered
-                  ? "0 4px 20px 0 #0003"
-                  : baseTileStyle.boxShadow,
-                minWidth: "28vw",
-                margin: "24px 12px",
-              }}
-              onMouseEnter={analyticsTiles[0].onMouseEnter}
-              onMouseLeave={analyticsTiles[0].onMouseLeave}
-              onClick={analyticsTiles[0].onClick}
-              tabIndex={0}
-              role="button"
-            >
-              <h2 style={{ fontSize: "2rem", color: "#222", margin: 0 }}>
-                {analyticsTiles[0].label}
-              </h2>
-              {/* Pie Chart goes here */}
-              {analyticsTiles[0].content}
-            </div>
-          </div>
-          {/* Bottom two tiles */}
-          <div
-            style={{ display: "flex", justifyContent: "center", width: "100%" }}
-          >
-            {[analyticsTiles[1], analyticsTiles[2]].map((tile) => (
-              <div
-                key={tile.key}
-                style={{
-                  ...baseTileStyle,
-                  background: tile.hovered
-                    ? "#e6ecea"
-                    : baseTileStyle.background,
-                  boxShadow: tile.hovered
-                    ? "0 4px 20px 0 #0003"
-                    : baseTileStyle.boxShadow,
-                  minWidth: "28vw",
-                  margin: "24px 12px",
-                }}
-                onMouseEnter={tile.onMouseEnter}
-                onMouseLeave={tile.onMouseLeave}
-                onClick={tile.onClick}
-                tabIndex={0}
-                role="button"
-              >
-                <h2 style={{ fontSize: "2rem", color: "#222", margin: 0 }}>
-                  {tile.label}
-                </h2>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // new child information
-  const [showModal, setShowModal] = useState(false);
-  const [childName, setChildName] = useState("");
-  const [childAge, setChildAge] = useState<number | null>(null);
-  const [childGender, setChildGender] = useState<"m" | "f">("m");
-  const [childLanguages, setChildLanguages] = useState<string[]>([]);
-  const [childTrauma, setChildTrauma] = useState<
-    | "At risk youth"
-    | "Substance abuse"
-    | "Co-occuring disorders"
-    | "Sexual abuse survivors"
-    | "Human trafficking survivors"
-    | undefined
-  >(undefined);
-  const [matched, setMatched] = useState<FosterChild | null>(null);
-
-  const [matchedResult, setMatchedResult] = useState<
-    { home: Home; score: number }[] | null
-  >(null);
-  const [submitted, setSubmitted] = useState(false);
+  // If Data Dashboard tab is selected, show the dashboard iframe
+  const showDashboardIframe = activeTab === "Data Dashboard";
 
   // Default: show main tiles
   return (
     <div
       style={{
         display: "flex",
-        height: "100dvh",
+        height: "100vh",
         width: "100vw",
         background: "#f5f6fa",
         overflow: "hidden",
+        position: "relative",
       }}
     >
       {/* Sidebar */}
@@ -245,38 +167,57 @@ function Dashboard() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
-      {/* Main content: tiles centered */}
+
+      {/* Main content (tiles or iframe) */}
       <div
         style={{
           flex: 1,
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: showDashboardIframe ? "flex-start" : "center",
           gap: "40px",
           height: "100%",
+          position: "relative",
         }}
       >
-        {tiles.map((tile) => (
-          <div
-            key={tile.key}
+        {showDashboardIframe ? (
+          <iframe
+            title="ArcGIS Data Dashboard"
+            frameBorder="0"
             style={{
-              ...baseTileStyle,
-              background: tile.hovered ? "#e6ecea" : baseTileStyle.background,
-              boxShadow: tile.hovered
-                ? "0 4px 20px 0 #0003"
-                : baseTileStyle.boxShadow,
+              height: "100%",
+              width: "100%",
+              border: "none",
+              borderRadius: "12px",
+              boxShadow: "0 4px 20px 0 #0003",
+              background: "#fff",
             }}
-            onMouseEnter={tile.onMouseEnter}
-            onMouseLeave={tile.onMouseLeave}
-            onClick={tile.onClick}
-            tabIndex={0}
-            role="button"
-          >
-            <h2 style={{ fontSize: "2rem", color: "#222", margin: 0 }}>
-              {tile.label}
-            </h2>
-          </div>
-        ))}
+            src="https://www.arcgis.com/apps/dashboards/316e97c317f8462587fe15616e581dfd"
+            allowFullScreen
+          />
+        ) : (
+          tiles.map((tile) => (
+            <div
+              key={tile.key}
+              style={{
+                ...baseTileStyle,
+                background: tile.hovered ? "#e6ecea" : baseTileStyle.background,
+                boxShadow: tile.hovered
+                  ? "0 4px 20px 0 #0003"
+                  : baseTileStyle.boxShadow,
+              }}
+              onMouseEnter={tile.onMouseEnter}
+              onMouseLeave={tile.onMouseLeave}
+              onClick={tile.onClick}
+              tabIndex={0}
+              role="button"
+            >
+              <h2 style={{ fontSize: "2rem", color: "#222", margin: 0 }}>
+                {tile.label}
+              </h2>
+            </div>
+          ))
+        )}
       </div>
 
       <CalciteModal
