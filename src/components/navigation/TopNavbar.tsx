@@ -41,7 +41,7 @@ function TopNavbar() {
           }
         />
       </CalciteMenu>
-      <CalciteNavigationUser slot="user" fullName="Jack Dangermond" />
+      <CalciteNavigationUser slot="user" fullName="Jack Dangermond" username="jdangermond"/>
     </CalciteNavigation>
   );
 }
