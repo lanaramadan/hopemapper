@@ -93,25 +93,21 @@ export function loadHomesFromText(csv: string): Home[] {
   });
 }
 
-// update the child's matched homes
+// update and return the child's matched homes
 export default function matchChildrenToHomes(
   children: FosterChild[],
   homes: Home[]
 ): FosterChild[] {
   return children.map((child) => {
     const topHomes = GetTopHomes(child, homes);
-    console.log(
-      `Top homes for ${child.name} ${child.age} ${child.gender}${
-        child.traumaCare ? ` (${child.traumaCare})` : ""
-      }:`,
-      topHomes
-    );
+    console.log(topHomes)
     return {
       ...child,
       matchedHomes: topHomes.length > 0 ? topHomes : null,
     };
   });
 }
+
 
 // get top 3 homes for each child
 function GetTopHomes(child: FosterChild, homes: Home[]) {
@@ -124,7 +120,8 @@ function GetTopHomes(child: FosterChild, homes: Home[]) {
 
   scoredHomes.sort((a, b) => b.score - a.score);
 
-  return scoredHomes.slice(0, 3).map((item) => item.home);
+  // return scoredHomes.slice(0, 3).map((item) => item.home);
+  return scoredHomes.slice(0, 3);
 }
 
 // get score of each home

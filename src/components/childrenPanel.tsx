@@ -80,33 +80,40 @@ function ChildrenPanel({
                     </div>
                     <div className="p-1 mr-4">
                       <CalciteCardGroup>
-                        {child.matchedHomes.slice(0, 3).map((home, index) => (
-                          <CalciteCard
-                            key={index}
-                            class="w-full max-w-md shadow-md"
-                          >
-                            <span slot="heading">
-                              {index === 0
-                                ? "#1 Match: "
-                                : index === 1
-                                ? "#2 Match: "
-                                : "#3 Match: "}
-                              {home.facilityName}
-                            </span>
-                            <span slot="subtitle">
-                              {home.address}, {home.city},{" "}
-                              {home.state.toUpperCase()} {home.zipCode}
-                            </span>
-                            <div slot="footer-start"/>
-                            <CalciteButton
-                              slot="footer-end"
-                              scale="s"
-                              label="View"
+                        {child.matchedHomes
+                          .slice(0, 3)
+                          .map(({ home, score }, index) => (
+                            <CalciteCard
+                              key={index}
+                              class="w-full max-w-md shadow-md"
                             >
-                              View on Map
-                            </CalciteButton>
-                          </CalciteCard>
-                        ))}
+                              <div slot="heading">
+                                {index === 0
+                                  ? "#1 Match: "
+                                  : index === 1
+                                  ? "#2 Match: "
+                                  : "#3 Match: "}
+                                {home.facilityName}
+                              </div>
+
+                              <div slot="description">
+                                Match Score: {score}%
+                              </div>
+                              <div slot="description" className="italic">
+                                {home.address}, {home.city},{" "}
+                                {home.state.toUpperCase()} {home.zipCode}
+                              </div>
+                              <div slot="footer-start" />
+                              <CalciteButton
+                                slot="footer-end"
+                                scale="s"
+                                label="View"
+                                appearance="outline-fill"
+                              >
+                                View on Map
+                              </CalciteButton>
+                            </CalciteCard>
+                          ))}
                       </CalciteCardGroup>
                     </div>
                   </div>
