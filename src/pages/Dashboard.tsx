@@ -398,14 +398,14 @@ function Dashboard() {
                           {home.address}, {home.city},{" "}
                           {home.state.toUpperCase()} {home.zipCode}
                         </div>
-                        <CalciteButton
+                        {/* <CalciteButton
                           slot="footer-end"
                           scale="s"
                           label="View"
                           appearance="outline-fill"
                         >
                           View on Map
-                        </CalciteButton>
+                        </CalciteButton> */}
                       </CalciteCard>
                     ))}
                   </CalciteCardGroup>
