@@ -1,19 +1,23 @@
+import { useState, useEffect } from "react";
+
 import {
   CalciteShell,
   CalciteShellPanel,
   CalcitePanel,
 } from "@esri/calcite-components-react";
 
+import TopNavbar from "../components/navigation/TopNavBar";
 import Filters from "../components/filters";
 import ChildrenPanel from "../components/childrenPanel";
 import CustomMap from "../components/customMap";
-import { useState, useEffect } from "react";
+
 import type { FosterChild } from "../types/fosterChild";
 import type { Home } from "../types/home";
+
 import {
   loadFosterChildrenFromText,
   loadHomesFromText,
-} from "../logic/matchAlgorithm";
+} from "../logic/csvLoaders";
 
 function MapDashboard() {
   const [fosterChildren, setFosterChildren] = useState<FosterChild[]>([]);
@@ -57,6 +61,7 @@ function MapDashboard() {
 
   return (
     <CalciteShell className="h-screen w-screen" content-behind>
+      <TopNavbar />
       {/* map content */}
       <div className="h-full w-full">
         <CustomMap />
@@ -67,7 +72,7 @@ function MapDashboard() {
         slot="panel-start"
         position="start"
         displayMode="float-content"
-        className="h-[35%]"
+        className="h-[35%] pl-2"
       >
         <CalcitePanel>
           <Filters
@@ -100,6 +105,7 @@ function MapDashboard() {
         slot="panel-end"
         position="start"
         displayMode="float-content"
+        className="pr-3"
       >
         <CalcitePanel>
           <ChildrenPanel
@@ -110,6 +116,9 @@ function MapDashboard() {
                 (gender != "any" ? child.gender == gender : true) &&
                 (populations.length > 0
                   ? child.traumaCare && populations.includes(child.traumaCare)
+                  : true) &&
+                (languages.length > 0
+                  ? child.languages.some((lang) => languages.includes(lang))
                   : true)
             )}
             homes={homes}

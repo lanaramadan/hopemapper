@@ -211,8 +211,10 @@ function Filters({
             }
           >
             <CalciteComboboxItem value="English" heading="English" />
+            <CalciteComboboxItem value="Arabic" heading="Arabic" />
             <CalciteComboboxItem value="Spanish" heading="Spanish" />
             <CalciteComboboxItem value="Mandarin" heading="Mandarin" />
+            <CalciteComboboxItem value="Portuguese" heading="Portuguese" />
           </CalciteCombobox>
         </CalciteBlock>
 

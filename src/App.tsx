@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/map" element={<MapDashboard />} />
+        <Route path="/map-dashboard" element={<MapDashboard />} />
       </Routes>
     </Router>
     </MantineProvider>

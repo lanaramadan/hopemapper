@@ -18,7 +18,7 @@ import {
   IconStepInto
 } from '@tabler/icons-react';
 import { Text } from '@mantine/core';
-import homemapperLogo from './images/hopemapper-logo.png'; // Adjust the path as necessary
+import homemapperLogo from '/images/hopemapper-logo.png';
 
 const tabs = {
   apps: [
