@@ -192,7 +192,7 @@ function Dashboard() {
               boxShadow: "0 4px 20px 0 #0003",
               background: "#fff",
             }}
-            src="https://www.arcgis.com/apps/dashboards/316e97c317f8462587fe15616e581dfd"
+            src="https://www.arcgis.com/apps/dashboards/bec5cfde60ad41fb9d2f4ca0b16e3355"
             allowFullScreen
           />
         ) : (
