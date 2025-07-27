@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SideNavbar from '../navbar';
+import SideNavbar from '../components/navigation/Navbar';
 import TilePieChart from '../ArcGISChart';
 
 const baseTileStyle = {
