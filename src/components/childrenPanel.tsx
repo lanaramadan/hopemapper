@@ -70,6 +70,7 @@ function ChildrenPanel({
                     ?.label || "N/A"}
                 </div>
                 <div>Age: {child.age}</div>
+                <div>Languages: {child.languages?.join(", ") || "N/A"}</div>
                 <div>
                   Trauma Care: {child.traumaCare ? child.traumaCare : "N/A"}
                 </div>
@@ -96,7 +97,16 @@ function ChildrenPanel({
                                 {home.facilityName}
                               </div>
 
-                              <div slot="description">
+                              <div
+                                slot="description"
+                                className={
+                                  score >= 80
+                                    ? "text-[#769A96] font-medium"
+                                    : score >= 50
+                                    ? "text-[#D8B668] font-medium"
+                                    : "text-[#AC6868] font-medium"
+                                }
+                              >
                                 Match Score: {score}%
                               </div>
                               <div slot="description" className="italic">

@@ -111,7 +111,10 @@ function MapDashboard() {
                 (gender != "any" ? child.gender == gender : true) &&
                 (populations.length > 0
                   ? child.traumaCare && populations.includes(child.traumaCare)
-                  : true)
+                  : true) && 
+                  (languages.length > 0
+                    ? child.languages.some((lang) => languages.includes(lang))
+                    : true)
             )}
             homes={homes}
           />

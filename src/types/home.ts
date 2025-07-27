@@ -25,4 +25,5 @@ export type Home = {
   city: string;
   state: string;
   zipCode: string;
+  languages: string[];
 };

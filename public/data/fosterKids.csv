@@ -1,31 +1,31 @@
-First Name,Last Name,Age,Gender,Type of Trauma Care
-Emily,Chen,14,f
-Michael,Roberts,9,m,At risk youth
-Sophia,Garcia,5,f,Human trafficking survivors
-Daniel,Brown,17,m,Substance abuse
-Olivia,Miller,12,f
-William,Davis,7,m,At risk youth
-Ava,Wilson,3,f,Human trafficking survivors
-James,Moore,19,m,Substance abuse
-Isabella,Taylor,15,f
-Ethan,Anderson,10,m,At risk youth
-Mia,Thomas,1,f,Human trafficking survivors
-Alexander,Jackson,20,m,Substance abuse
-Charlotte,White,13,f
-Benjamin,Harris,6,m,At risk youth
-Amelia,Martin,2,f,Human trafficking survivors
-Jacob,Thompson,18,m,Substance abuse
-Harper,Green,11,f
-Lucas,Hall,8,m,At risk youth
-Evelyn,King,4,f,Human trafficking survivors
-Mason,Wright,16,m,Substance abuse
-Abigail,Lopez,0,f
-Liam,Hill,14,m,At risk youth
-Elizabeth,Scott,9,f,Human trafficking survivors
-Noah,Adams,21,m,Substance abuse
-Sofia,Baker,10,f
-Elijah,Nelson,5,m,At risk youth
-Avery,Carter,16,f,Human trafficking survivors
-Logan,Mitchell,13,m,Substance abuse
-Ella,Perez,7,f
-Caleb,Roberts,11,m,At risk youth
+First Name,Last Name,Age,Gender,Type of Trauma Care,Languages Spoken
+Emily,Chen,14,f,,English Mandarin
+Michael,Roberts,9,m,At risk youth,English
+Sophia,Garcia,5,f,Human trafficking survivors,English Spanish
+Daniel,Brown,17,m,Substance abuse,English
+Olivia,Miller,12,f,,English
+William,Davis,7,m,At risk youth,English
+Ava,Wilson,3,f,Human trafficking survivors,English
+James,Moore,19,m,Substance abuse,English
+Isabella,Taylor,15,f,,English French
+Ethan,Anderson,10,m,At risk youth,English
+Mia,Thomas,1,f,Human trafficking survivors,English
+Alexander,Jackson,20,m,Substance abuse,English
+Charlotte,White,13,f,,English
+Benjamin,Harris,6,m,At risk youth,English
+Amelia,Martin,2,f,Human trafficking survivors,English Spanish
+Jacob,Thompson,18,m,Substance abuse,English
+Harper,Green,11,f,,English
+Lucas,Hall,8,m,At risk youth,English
+Evelyn,King,4,f,Human trafficking survivors,English
+Mason,Wright,16,m,Substance abuse,English
+Abigail,Lopez,0,f,,English Spanish
+Liam,Hill,14,m,At risk youth,English
+Elizabeth,Scott,9,f,Human trafficking survivors,English
+Noah,Adams,21,m,Substance abuse,English
+Sofia,Baker,10,f,,English Portuguese
+Elijah,Nelson,5,m,At risk youth,English
+Avery,Carter,16,f,Human trafficking survivors,English
+Logan,Mitchell,13,m,Substance abuse,English
+Ella,Perez,7,f,,English Spanish
+Caleb,Roberts,11,m,At risk youth,English

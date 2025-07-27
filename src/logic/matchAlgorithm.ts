@@ -53,6 +53,9 @@ export function loadFosterChildrenFromText(csv: string): FosterChild[] {
       gender: parseGender(obj["Gender"]),
       traumaCare: parseTraumaCare(obj["Type of Trauma Care"]),
       matchedHomes: null,
+      languages: obj["Languages Spoken"]
+        ? obj["Languages Spoken"].split(" ").map((lang) => lang.trim())
+        : [],
     };
   });
 }
@@ -89,6 +92,9 @@ export function loadHomesFromText(csv: string): Home[] {
       city: obj["city"],
       state: obj["state"],
       zipCode: obj["zip_code"],
+      languages: obj["languages_spoken"]
+        ? obj["languages_spoken"].split(" ").map((lang) => lang.trim())
+        : [],
     };
   });
 }
@@ -149,6 +155,15 @@ function scoreMatch(child: FosterChild, home: Home) {
   } else {
     score -= 100;
   }
+
+  // language check
+  if (
+    child.languages.length > 0 &&
+    home.languages.some((lang) => child.languages.includes(lang))
+  ) {
+    score += 10;
+  }
+  
   return score;
 }
 

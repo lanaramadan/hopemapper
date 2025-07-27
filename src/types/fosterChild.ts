@@ -11,6 +11,7 @@ export type FosterChild = {
     age: number;
     gender: "m" | "f";
     traumaCare?: "At risk youth" | "Substance abuse" | "Co-occuring disorders" | "Sexual abuse survivors" | "Human trafficking survivors";
+    languages: string[];
     matchedHomes: HomeMatch[] | null;
   };
   
