@@ -137,7 +137,7 @@ function scoreMatch(child: FosterChild, home: Home) {
 export async function runMatching() {
   const fosterKidsRes = await fetch("/data/fosterKids.csv");
   const fosterKidsCsv = await fosterKidsRes.text();
-  const homesRes = await fetch("/data/Foster_Family_Homes_-_3_Counties_2(in).csv");
+  const homesRes = await fetch("/data/fosterHomes.csv");
   const homesCsv = await homesRes.text();
 
   const children = loadFosterChildrenFromText(fosterKidsCsv);

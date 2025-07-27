@@ -9,10 +9,15 @@ import ChildrenPanel from "../components/childrenPanel";
 import CustomMap from "../components/customMap";
 import { useState, useEffect } from "react";
 import type { FosterChild } from "../types/fosterChild";
+import type { Home } from "../types/home";
+import {
+  loadFosterChildrenFromText,
+  loadHomesFromText,
+} from "../logic/matchAlgorithm";
 
 function MapDashboard() {
-  // array w/ foster kids
   const [fosterChildren, setFosterChildren] = useState<FosterChild[]>([]);
+  const [homes, setHomes] = useState<Home[]>([]);
 
   // filter settings
   const [minOtherKidsAge, setMinOtherKidsAge] = useState(0);
@@ -29,35 +34,26 @@ function MapDashboard() {
   // get csv foster kid data
   useEffect(() => {
     fetch("/data/fosterKids.csv")
-      .then((response) => response.text())
-      .then((text) => {
-        const lines = text.trim().split("\n");
-        const headers = lines[0].split(",").map((h) => h.trim());
-
-        const data = lines.slice(1).map((line) => {
-          const values = line.split(",").map((v) => v.trim());
-          const record: Record<string, string> = {};
-          headers.forEach((h, i) => {
-            record[h] = values[i];
-          });
-
-          const child: FosterChild = {
-            name: `${record["First Name"]} ${record["Last Name"]}`,
-            gender: record["Gender"]?.toLowerCase() || "unknown",
-            age: parseInt(record["Age"], 10) || 0,
-            matchedHome: null,
-            traumaCare: record["Type of Trauma Care"]
-          };
-
-          return child;
-        });
-
-        setFosterChildren(data);
+      .then((res) => res.text())
+      .then((csvText) => {
+        const children = loadFosterChildrenFromText(csvText);
+        setFosterChildren(children);
       })
-      .catch((error) => console.error("Error fetching CSV:", error));
+      .catch((err) => console.error("Error loading foster kids:", err));
   }, []);
 
-  console.log(fosterChildren)
+  // get csv home data
+  useEffect(() => {
+    fetch("/data/fosterHomes.csv")
+      .then((res) => res.text())
+      .then((csvText) => {
+        const parsedHomes = loadHomesFromText(csvText);
+        setHomes(parsedHomes);
+      })
+      .catch((err) => console.error("Error loading foster homes:", err));
+  }, []);
+
+  console.log(fosterChildren);
 
   return (
     <CalciteShell className="h-screen w-screen" content-behind>
@@ -108,8 +104,15 @@ function MapDashboard() {
         <CalcitePanel>
           <ChildrenPanel
             fosterChildren={fosterChildren.filter(
-              (child) => (child.age <= maxAge && child.age >= minAge) && (gender != "any" ? child.gender == gender : true) && (populations.length > 0 ? (child.traumaCare && populations.includes(child.traumaCare)) : true)
+              (child) =>
+                child.age <= maxAge &&
+                child.age >= minAge &&
+                (gender != "any" ? child.gender == gender : true) &&
+                (populations.length > 0
+                  ? child.traumaCare && populations.includes(child.traumaCare)
+                  : true)
             )}
+            homes={homes}
           />
         </CalcitePanel>
       </CalciteShellPanel>

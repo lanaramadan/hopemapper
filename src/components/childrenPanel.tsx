@@ -5,20 +5,23 @@ import {
   CalciteButton,
 } from "@esri/calcite-components-react";
 import type { FosterChild } from "../types/fosterChild";
+import type { Home } from "../types/home";
 import matchChildrenToBeds from '../logic/matchAlgorithm'
-import {generateBedData} from "../data/generateMockData";
 import { useState, useEffect } from "react";
 
 
-function ChildrenPanel({ fosterChildren }: { fosterChildren: FosterChild[] }) {
-  const [matchedChildren, setMatchedChildren] = useState(fosterChildren);
+function ChildrenPanel({
+  fosterChildren,
+  homes,
+}: {
+  fosterChildren: FosterChild[];
+  homes: Home[];
+}) {  const [matchedChildren, setMatchedChildren] = useState(fosterChildren);
 
   const handleMatchClick = () => {
-    const beds = generateBedData(10);
-    console.log("fosterChildren before match:", fosterChildren);
-    console.log("matchedChildren before match:", matchedChildren);
-    const updatedChildren = matchChildrenToBeds([...matchedChildren], beds);
-    console.log("updatedChildren:", updatedChildren);
+    console.log("homes before match:", homes);
+    console.log("foster children before match:", fosterChildren);
+    const updatedChildren = matchChildrenToBeds([...matchedChildren], homes);
     setMatchedChildren([...updatedChildren]);
   };
 
