@@ -64,7 +64,7 @@ function ChildrenPanel({
 
         <CalciteBlock open>
           {matchedChildren.map((child) => (
-            <CalciteBlockSection text={child.name} open>
+            <CalciteBlockSection text={child.name}>
               <div className="pl-6 mb-5">
                 <div>
                   Gender:{" "}
