@@ -2,7 +2,9 @@ import type { FosterChild } from "../types/fosterChild";
 import type { Home } from "../types/home";
 
 // Helper to parse trauma care string to enum
-function parseTraumaCare(str: string | undefined): FosterChild["traumaCare"] | undefined {
+function parseTraumaCare(
+  str: string | undefined
+): FosterChild["traumaCare"] | undefined {
   if (!str) return undefined;
   const normalized = str.trim();
   switch (normalized) {
@@ -31,14 +33,16 @@ function parseCSV(content: string): string[][] {
   return content
     .trim()
     .split("\n")
-    .map(line => line.split(",").map(cell => cell.trim().replace(/^"|"$/g, "")));
+    .map((line) =>
+      line.split(",").map((cell) => cell.trim().replace(/^"|"$/g, ""))
+    );
 }
 
 // Parse fosterKids.csv from a string (browser-friendly)
 export function loadFosterChildrenFromText(csv: string): FosterChild[] {
   const rows = parseCSV(csv);
   const headers = rows[0];
-  return rows.slice(1).map(row => {
+  return rows.slice(1).map((row) => {
     const obj: Record<string, string> = {};
     headers.forEach((header, i) => {
       obj[header] = row[i] || "";
@@ -48,7 +52,7 @@ export function loadFosterChildrenFromText(csv: string): FosterChild[] {
       age: Number(obj["Age"]),
       gender: parseGender(obj["Gender"]),
       traumaCare: parseTraumaCare(obj["Type of Trauma Care"]),
-      matchedHome: null,
+      matchedHomes: null,
     };
   });
 }
@@ -57,11 +61,12 @@ export function loadFosterChildrenFromText(csv: string): FosterChild[] {
 export function loadHomesFromText(csv: string): Home[] {
   const rows = parseCSV(csv);
   const headers = rows[0];
-  return rows.slice(1).map(row => {
+  return rows.slice(1).map((row) => {
     const obj: Record<string, string> = {};
     headers.forEach((header, i) => {
       obj[header] = row[i] || "";
     });
+
     return {
       traumaCare: parseTraumaCare(obj["trauma_care"]) as Home["traumaCare"],
       address: obj["street_address"],
@@ -72,12 +77,28 @@ export function loadHomesFromText(csv: string): Home[] {
       agePreference: `${obj["age_min"]}-${obj["age_max"]}`,
       genderPreference: obj["gender_preference"],
       bedNumber: Number(obj["facility_capacity"]),
+      facilityType: obj["facility_type"],
+      facilityNumber: obj["facility_number"],
+      facilityName: obj["facility_name"],
+      licensee: obj["licensee"],
+      facilityAdministrator: obj["facility_administrator"],
+      countyName: obj["county_name"],
+      regionalOffice: obj["regional_office"],
+      facilityStatus: obj["facility_status"],
+      inferredTraumaCare: obj["inferred_trauma_care"],
+      city: obj["city"],
+      state: obj["state"],
+      zipCode: obj["zip_code"],
     };
   });
 }
 
-export default function matchChildrenToHomes(children: FosterChild[], homes: Home[]) {
-  for (const child of children) {
+// update the child's matched homes
+export default function matchChildrenToHomes(
+  children: FosterChild[],
+  homes: Home[]
+): FosterChild[] {
+  return children.map((child) => {
     const topHomes = GetTopHomes(child, homes);
     console.log(
       `Top homes for ${child.name} ${child.age} ${child.gender}${
@@ -85,8 +106,11 @@ export default function matchChildrenToHomes(children: FosterChild[], homes: Hom
       }:`,
       topHomes
     );
-  }
-  return children;
+    return {
+      ...child,
+      matchedHomes: topHomes.length > 0 ? topHomes : null,
+    };
+  });
 }
 
 // get top 3 homes for each child
@@ -111,9 +135,7 @@ function scoreMatch(child: FosterChild, home: Home) {
     score += 25;
   }
   // weighted age check
-  const [minAge, maxAge] = home.agePreference
-    .split("-")
-    .map((n) => Number(n));
+  const [minAge, maxAge] = home.agePreference.split("-").map((n) => Number(n));
   if (minAge <= child.age && child.age <= maxAge) {
     score += 50;
   } else if (minAge <= child.age && child.age <= maxAge + 1) {
