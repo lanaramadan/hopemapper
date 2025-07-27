@@ -281,7 +281,17 @@ function Dashboard() {
 
       <CalciteModal
         open={showModal}
-        onCalciteModalClose={() => setShowModal(false)}
+        onCalciteModalClose={() => {
+          setShowModal(false);
+          setChildName("");
+          setChildAge(null);
+          setChildGender("m");
+          setChildLanguages([]);
+          setChildTrauma(undefined);
+          setMatched(null);
+          setMatchedResult(null);
+          setSubmitted(false);
+        }}
       >
         <div slot="header" id="modal-title">
           {!submitted
