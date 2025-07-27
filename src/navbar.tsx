@@ -24,7 +24,7 @@ const tabs = {
   apps: [
     { link: '', label: 'Placement Tools', icon: IconStepInto  },
     { link: '', label: 'Data Dashboard', icon: IconBrandDatabricks },
-    { link: '', label: 'Settings', icon: IconSettings }
+    { link: '', label: 'Admin', icon: IconSettings }
   ],
 
 };
