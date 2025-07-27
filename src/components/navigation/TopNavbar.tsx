@@ -36,7 +36,7 @@ function TopNavbar() {
           text="Data Dashboard"
           onClick={() =>
             navigate("/dashboard", {
-              state: { initialActiveTab: "Data Analysis" },
+              state: { initialActiveTab: "Data Dashboard" },
             })
           }
         />
