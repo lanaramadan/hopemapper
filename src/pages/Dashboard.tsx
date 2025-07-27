@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import SideNavbar from '../navbar';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import SideNavbar from '../components/navigation/Navbar';
 import TilePieChart from '../ArcGISChart';
 
 const baseTileStyle = {
@@ -21,10 +21,20 @@ const baseTileStyle = {
 
 function Dashboard() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.initialActiveTab) {
+      setActiveTab(location.state.initialActiveTab);
+    }
+  }, [location.state]);
+  
+
+  console.log(location)
 
   // State for navbar section and active tab
   const [section, setSection] = useState('apps');
-  const [activeTab, setActiveTab] = useState('Placement Tools');
+  const [activeTab, setActiveTab] = useState(location.state?.initialActiveTab || 'Placement Tools');
   const [hovered, setHovered] = useState<string | null>(null);
 
   // Analytics tiles
@@ -64,8 +74,10 @@ function Dashboard() {
   let tiles = [
     {
       key: 'homes',
-      label: 'Available Homes',
-      onClick: () => navigate('/map'),
+
+      label: 'Upload Foster Child',
+      onClick: () => navigate('/map-dashboard'), // <-- Navigates to /map
+
       hovered: hovered === 'homes',
       onMouseEnter: () => setHovered('homes'),
       onMouseLeave: () => setHovered(null),
@@ -73,7 +85,9 @@ function Dashboard() {
     {
       key: 'matching',
       label: 'Home Matching',
-      onClick: () => navigate('/map'),
+
+      onClick: () => navigate('/map-dashboard'), // <-- Navigates to /map
+
       hovered: hovered === 'matching',
       onMouseEnter: () => setHovered('matching'),
       onMouseLeave: () => setHovered(null),

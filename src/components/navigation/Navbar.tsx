@@ -18,13 +18,13 @@ import {
   IconStepInto
 } from '@tabler/icons-react';
 import { Text } from '@mantine/core';
-import homemapperLogo from './images/hopemapper-logo.png'; // Adjust the path as necessary
+import homemapperLogo from '/images/hopemapper-logo.png';
 
 const tabs = {
   apps: [
     { link: '', label: 'Placement Tools', icon: IconStepInto  },
     { link: '', label: 'Data Dashboard', icon: IconBrandDatabricks },
-    { link: '', label: 'Settings', icon: IconSettings }
+    { link: '', label: 'Admin', icon: IconSettings }
   ],
 
 };
