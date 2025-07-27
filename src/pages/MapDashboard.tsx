@@ -22,6 +22,8 @@ import {
 function MapDashboard() {
   const [fosterChildren, setFosterChildren] = useState<FosterChild[]>([]);
   const [homes, setHomes] = useState<Home[]>([]);
+  const [center, setCenter] = useState([-122.41, 37.77]);
+  const [zoom, setZoom] = useState(6);
 
   // filter settings
   const [minOtherKidsAge, setMinOtherKidsAge] = useState(0);
@@ -64,7 +66,7 @@ function MapDashboard() {
       <TopNavbar />
       {/* map content */}
       <div className="h-full w-full">
-        <CustomMap />
+        <CustomMap center={center} zoom={zoom} />
       </div>
 
       {/* left panel */}
@@ -72,7 +74,7 @@ function MapDashboard() {
         slot="panel-start"
         position="start"
         displayMode="float-content"
-        className="h-[40%] pl-2"
+        className="h-[43%] pl-2"
       >
         <CalcitePanel>
           <Filters
@@ -122,6 +124,10 @@ function MapDashboard() {
                   : true)
             )}
             homes={homes}
+            onViewHomeOnMap={(home) => {
+              setCenter([home.location.long, home.location.lat]);
+              setZoom(18);
+            }}
           />
         </CalcitePanel>
       </CalciteShellPanel>

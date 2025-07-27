@@ -14,9 +14,11 @@ import { useState, useEffect } from "react";
 function ChildrenPanel({
   fosterChildren,
   homes,
+  onViewHomeOnMap,
 }: {
   fosterChildren: FosterChild[];
   homes: Home[];
+  onViewHomeOnMap (home: Home): void;
 }) {
   const [matchedChildren, setMatchedChildren] = useState(fosterChildren);
 
@@ -119,6 +121,12 @@ function ChildrenPanel({
                                 scale="s"
                                 label="View"
                                 appearance="outline-fill"
+                                onClick={() => {
+                                onViewHomeOnMap(home);
+                                setTimeout(() => {
+                                  handleMatchClick();
+                                }, 10);
+                              }}
                               >
                                 View on Map
                               </CalciteButton>
